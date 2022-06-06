@@ -1,0 +1,29 @@
+@import './common/include';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+  min-width: 1280px;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 0.3px;
+
+  &.modal-open {
+    overflow: hidden;
+
+    .modal {
+      overflow: hidden;
+    }
+  }
+}
