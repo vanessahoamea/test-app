@@ -17,17 +17,23 @@
   * Make sure to remember / note the credentials asked for authentication
 
 ## * Server setup *
+* Setup .env file with following settings:
+  ```
+  PORT=8080
+  NODE_ENV=dev
+  DATABASE_URL=postgres://postgres:POSTGRES_PASSWORD@localhost:5432/persons
+  RUN_CRON=true
+  ```
+* In .env file make sure to replace POSTGRESQL_PASSWORD with the password you set up on PostgreSQL installation
 * Install globally nodemon
   * npm install nodemon@2.0.7 -g
-* In .env file make sure to replace POSTGRESQL_PASS with the password you set up on PostgreSQL installation
 * In the root folder
   * Execute the command npm install (all server dependencies should install successfully)
-* Navigate to /server
   * Execute the command nodemon
   * If everything is ok, you should see in the console the following message:
   ```javascript
     λ nodemon
-    [nodemon] 2.0.4
+    [nodemon] 2.0.7
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching path(s): *.*
     [nodemon] watching extensions: js,mjs,json
