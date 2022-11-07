@@ -5,8 +5,8 @@ import { faPlus, faEdit, faTrashAlt, faChevronUp } from '@fortawesome/free-solid
 import { SCROLL_TOP, SET_HEIGHT } from 'src/app/utils/utils-table';
 import { InformationModalComponent } from './information-modal/information-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { toastr } from '../toastr/toastr.component';
 
 @Component({
   selector: 'app-information',
@@ -18,7 +18,7 @@ export class InformationComponent implements OnInit {
   limit: number = 70; showBackTop: string = '';
   informations: any = [];
 
-  constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService) { SET_HEIGHT('view', 20, 'height'); }
+  constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private toastr: ToastrService) { SET_HEIGHT('view', 20, 'height'); }
 
   ngOnInit(): void {
     this.loadData();
@@ -29,7 +29,7 @@ export class InformationComponent implements OnInit {
     axios.get('/api/information').then(({ data }) => {
       this.informations = data;
       this._spinner.hide();
-    }).catch(() => toastr.error('Eroare la preluarea informațiilor!'));
+    }).catch(() => this.toastr.error('Eroare la preluarea informațiilor!'));
   }
 
   addEdit = (id_information?: number): void => {
@@ -46,9 +46,9 @@ export class InformationComponent implements OnInit {
     modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți informația având tipul <b>${information.type}</b>, denumirea: <b>${information.name}</b>?`;
     modalRef.closed.subscribe(() => {
       axios.delete(`/api/information/${information.id}`).then(() => {
-        toastr.success('Informația a fost ștearsă cu succes!');
+        this.toastr.success('Informația a fost ștearsă cu succes!');
         this.loadData();
-      }).catch(() => toastr.error('Eroare la ștergerea informației!'));
+      }).catch(() => this.toastr.error('Eroare la ștergerea informației!'));
     });
   }
 

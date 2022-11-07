@@ -7,18 +7,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { TooltipModule, TooltipOptions } from 'ng2-tooltip-directive-ng13fix';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InformationComponent } from './components/information/information.component';
 import { InformationModalComponent } from './components/information/information-modal/information-modal.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-
-const DefaultTooltipOptions: TooltipOptions = {
-  'hide-delay': 0
-};
+import { MatTooltipModule, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -38,11 +35,19 @@ const DefaultTooltipOptions: TooltipOptions = {
     NgbModule,
     NgSelectModule,
     InfiniteScrollModule,
-    TooltipModule.forRoot(DefaultTooltipOptions as TooltipOptions),
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTooltipModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      timeOut: 3000,
+      extendedTimeOut: 3000,
+      progressBar: true,
+      closeButton: true,
+      enableHtml: true
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{ provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: { disableTooltipInteractivity: true } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { REPLACE_DIACRITICS } from 'src/app/utils/utils-input';
-import { toastr } from '../../toastr/toastr.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-information-modal',
@@ -14,7 +14,7 @@ export class InformationModalComponent implements OnInit {
 
   modal = {} as any;
 
-  constructor(private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal) {
+  constructor(private _spinner: NgxSpinnerService, public activeModal: NgbActiveModal, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class InformationModalComponent implements OnInit {
       axios.get(`/api/information/${this.id_information}`).then(({ data }) => {
         this.modal = data;
         this._spinner.hide();
-      }).catch(() => toastr.error('Eroare la preluarea informației!'));
+      }).catch(() => this.toastr.error('Eroare la preluarea informației!'));
     }
   }
 
@@ -33,15 +33,15 @@ export class InformationModalComponent implements OnInit {
     if (!this.id_information) {
       axios.post('/api/information', this.modal).then(() => {
         this._spinner.hide();
-        toastr.success('Informația a fost salvată cu succes!');
+        this.toastr.success('Informația a fost salvată cu succes!');
         this.activeModal.close();
-      }).catch(() => toastr.error('Eroare la salvarea informației!'));
+      }).catch(() => this.toastr.error('Eroare la salvarea informației!'));
     } else {
       axios.put('/api/information', this.modal).then(() => {
         this._spinner.hide();
-        toastr.success('Informația a fost modificată cu succes!');
+        this.toastr.success('Informația a fost modificată cu succes!');
         this.activeModal.close();
-      }).catch(() => toastr.error('Eroare la modificarea informației!'));
+      }).catch(() => this.toastr.error('Eroare la modificarea informației!'));
     }
   }
 

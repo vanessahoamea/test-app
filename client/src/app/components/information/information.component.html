@@ -44,11 +44,11 @@
               <td>{{r.name}}</td>
               <td width='100px' class='text-center'>{{r.type}}</td>
               <td width='60px' class='text-center'>{{r.liked}}</td>
-              <td width='30px' (click)='addEdit(r.id)' class='text-center'>
-                <fa-icon class='text-primary' [icon]='faEdit' tooltip='Modificare' placement='left'></fa-icon>
+              <td width='30px' (click)='addEdit(r.id)' class='text-center' matTooltip='Modificare' matTooltipPosition='left'>
+                <fa-icon class='text-primary' [icon]='faEdit'></fa-icon>
               </td>
-              <td width='30px' (click)='delete(r)' class='text-center' >
-                <fa-icon class='text-danger' [icon]='faTrashAlt' tooltip='Ștergere' placement='left'></fa-icon>
+              <td width='30px' (click)='delete(r)' class='text-center' matTooltip='Ștergere' matTooltipPosition='left'>
+                <fa-icon class='text-danger' [icon]='faTrashAlt'></fa-icon>
               </td>
             </tr>
             <tr colspan='15' *ngIf='!informations.length' class='text-center fw-bold'>
