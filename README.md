@@ -2,9 +2,8 @@
 ## *Prerequisites*
 * Make sure you have NodeJS globally installed, if not go to https://nodejs.org/en/download/ and download the latest version
 * Install WINDOWS REDIS
-  * Open this github link - https://github.com/dmajkic/redis/downloads
-  * Download and install the latest version of redis (currently redis-2.4.5)
-  * Follow the default installation steps
+  * Open this github link - https://github.com/zkteco-home/redis-windows/releases/tag/redis7.0.5
+  * Download and run redis-server.exe
 * Install PostgreSQL on local machine
   * Go to https://www.postgresql.org/download/windows/
   * Click on download the installer
