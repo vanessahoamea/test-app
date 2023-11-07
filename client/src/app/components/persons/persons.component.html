@@ -45,12 +45,20 @@
                             <td width='60px' class='text-center'>{{i + 1}}</td>
                             <td>{{person.first_name}} {{person.last_name}}</td>
                             <td width='100px' class='text-center'>{{person.cnp}}</td>
-                            <td width='100px' class='text-center'>XX</td>
-                            <td width='200px'>{{person.car_list}}</td>
+                            <td width='100px' class='text-center'>{{person.cnp | age}}</td>
+                            <td width='200px' class='text-center'>
+                                <ul>
+                                    <li *ngFor="let car of person.car_list" class="border">
+                                        {{car.brand}} {{car.model}}<br />
+                                        Capacitate cilindrică: {{car.cylinder_capacity}}<br />
+                                        Taxă de impozit: {{car.cylinder_capacity | tax}}
+                                    </li>
+                                </ul>
+                            </td>
                             <td width='30px' (click)='addEdit(person.id)' class='text-center' matTooltip='Modificare' matTooltipPosition='left'>
                               <fa-icon class='text-primary' [icon]='faEdit'></fa-icon>
                             </td>
-                            <td width='30px' (click)='delete(person)' class='text-center' matTooltip='Ștergere' matTooltipPosition='left'>
+                            <td width='30px' (click)='delete(person.id)' class='text-center' matTooltip='Ștergere' matTooltipPosition='left'>
                               <fa-icon class='text-danger' [icon]='faTrashAlt'></fa-icon>
                             </td>
                         </tr>

@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { faPlus, faEdit, faTrashAlt, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { SCROLL_TOP, SET_HEIGHT } from 'src/app/utils/utils-table';
+import type { Car } from 'src/app/types/car';
 
 @Component({
   selector: 'app-cars',
@@ -15,7 +16,7 @@ export class CarsComponent implements OnInit {
 
   faTrashAlt = faTrashAlt; faEdit = faEdit; faChevronUp = faChevronUp; faPlus = faPlus;
   limit: number = 70; showBackTop: string = '';
-  cars: any = [];
+  cars: Car[] = [];
 
   constructor(private _modal: NgbModal, private _spinner: NgxSpinnerService, private _toastr: ToastrService) {
     SET_HEIGHT('view', 20, 'height');

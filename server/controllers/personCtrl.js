@@ -13,7 +13,9 @@ module.exports = db => {
         },
     
         findAll: (_, res) => {
-            db.query(`SELECT p.id, first_name, last_name, cnp, array_agg(ARRAY[c.id::text, brand, model, year::text, cylinder_capacity::text]) AS car_list
+            db.query(`SELECT p.id, first_name, last_name, cnp, json_agg(
+                json_build_object('id', c.id, 'brand', brand, 'model', model, 'year', year, 'cylinder_capacity', cylinder_capacity)
+            ) AS car_list
             FROM "Person" p
             LEFT JOIN "Junction" j ON p.id = j.person_id
             LEFT JOIN "Car" c ON j.car_id = c.id
@@ -24,7 +26,9 @@ module.exports = db => {
         },
 
         find: (req, res) => {
-            db.query(`SELECT p.id, first_name, last_name, cnp, array_agg(ARRAY[c.id::text, brand, model, year::text, cylinder_capacity::text]) AS car_list
+            db.query(`SELECT p.id, first_name, last_name, cnp, json_agg(
+                json_build_object('id', c.id, 'brand', brand, 'model', model, 'year', year, 'cylinder_capacity', cylinder_capacity)
+            ) AS car_list
             FROM "Person" p
             LEFT JOIN "Junction" j ON p.id = j.person_id
             LEFT JOIN "Car" c ON j.car_id = c.id
