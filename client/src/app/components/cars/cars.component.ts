@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -25,11 +26,23 @@ export class CarsComponent implements OnInit {
   }
 
   loadData(): void {
-    //
+    this._spinner.show();
+    axios.get('/api/car').then(({ data }) => {
+      this.cars = data;
+      this._spinner.hide();
+    }).catch(() => this._toastr.error('Eroare la preluarea mașinilor!'));
   }
 
-  addEdit(): void {
-    alert("add car")
+  addEdit(car_id?: number): void {
+    alert("add car");
+  }
+
+  delete(car_id: number): void {
+    alert("delete car");
+  }
+
+  onResize(): void {
+    SET_HEIGHT('view', 20, 'height');
   }
 
   showTopButton(): void {
