@@ -18,6 +18,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { MatTooltipModule, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { PersonsComponent } from './components/persons/persons.component';
 import { CarsComponent } from './components/cars/cars.component';
+import { AgePipe } from './pipes/age.pipe';
+import { TaxPipe } from './pipes/tax.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CarsComponent } from './components/cars/cars.component';
     InformationModalComponent,
     ConfirmDialogComponent,
     PersonsComponent,
-    CarsComponent
+    CarsComponent,
+    AgePipe,
+    TaxPipe
   ],
   imports: [
     BrowserModule,
