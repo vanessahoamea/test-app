@@ -1,9 +1,6 @@
 module.exports = (sequelize, DataType) => {
     let model = sequelize.define('Car', {
-        number_plate: {
-            type: DataType.TEXT
-        },
-        company: {
+        brand: {
             type: DataType.TEXT
         },
         model: {

@@ -70,5 +70,12 @@ module.exports = function getModels(sequelize, Sequelize) {
     });
   }
 
+  // associations between models
+  sequelize.models.Person.hasMany(sequelize.models.Junction, { foreignKey: 'person_id' });
+  sequelize.models.Junction.belongsTo(sequelize.models.Person, { foreignKey: 'person_id' });
+
+  sequelize.models.Car.hasMany(sequelize.models.Junction, { foreignKey: 'car_id' });
+  sequelize.models.Junction.belongsTo(sequelize.models.Car, { foreignKey: 'car_id' });
+
   return sequelize;
 };
