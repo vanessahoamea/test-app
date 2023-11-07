@@ -1,8 +1,8 @@
 module.exports = db => {
     return {
         create: (req, res) => {
-            db.models.Person.create(req.body).then(() => {
-                res.send({ success: true });
+            db.models.Person.create(req.body).then((person) => {
+                res.send({ success: true, id: person.id });
             }).catch(() => res.status(401));
         },
 
@@ -46,9 +46,16 @@ module.exports = db => {
         },
 
         addCar: (req, res) => {
-            db.models.Junction.create({ person_id: req.params.id, car_id: req.body.car_id }).then(() => {
-                res.send({ success: true })
-            }).catch(() => res.status(401));
+            db.models.Junction.findOne({
+                where: { person_id: req.params.id, car_id: req.body.car_id }
+            }).then((exists) => {
+                if(exists)
+                    return res.status(401).send({ already_exists: true });
+
+                db.models.Junction.create({ person_id: req.params.id, car_id: req.body.car_id }).then(() => {
+                    res.send({ success: true })
+                }).catch(() => res.status(401));
+            });
         },
 
         removeCar: (req, res) => {
