@@ -1,0 +1,48 @@
+<div class='modal-header'>
+    <h4 class='modal-title'>{{person_id ? 'Modificare' : 'Adăugare'}} persoană</h4>
+</div>
+
+<div class='modal-body'>
+    <div *ngIf='invalidFields.length' class="error">
+        Următoarele câmpuri trebuie completate: {{invalidFields.join(', ')}}
+    </div>
+
+    <div class='row'>
+        <label class='col-2 control-label'>Nume*</label>
+        <div class='col-4'>
+            <input [(ngModel)]='data.last_name' class='form-control' placeholder='Nume...' maxlength='200' />
+        </div>
+
+        <label class='col-1 control-label'>Prenume*</label>
+        <div class='col-4'>
+            <input [(ngModel)]='data.first_name' class='form-control' placeholder='Prenume...' maxlength='200' />
+        </div>
+    </div>
+
+    <div class='row'>
+        <label class='col-2 control-label'>CNP*</label>
+        <div class='col-9'>
+            <input [(ngModel)]='data.cnp' class='form-control' placeholder='CNP...' maxlength='200' />
+        </div>
+    </div>
+
+    <div class='row'>
+        <label class='col-2 control-label'>Mașini deținute</label>
+        <div class='col-9'>
+            <ng-select [multiple]='true' [items]='cars' [(ngModel)]='data.car_list'>
+                <ng-template ng-label-tmp let-item='item' let-clear='clear'>
+                    <span class='ng-value-icon' (click)='clear(item)'>×</span>
+                    {{item.brand}} {{item.model}} ({{item.year}})
+                </ng-template>
+                <ng-template ng-option-tmp let-item='item'>
+                    {{item.brand}} {{item.model}} ({{item.year}})
+                </ng-template>   
+            </ng-select>
+        </div>
+    </div>
+</div>
+
+<div class='modal-footer'>
+    <button type='button' class='btn btn-outline-dark' (click)='activeModal.dismiss()'>Renunță</button>
+    <button type='button' class='btn btn-success' (click)='save()'>Salvează</button>
+</div>

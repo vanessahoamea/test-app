@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { faPlus, faEdit, faTrashAlt, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { SCROLL_TOP, SET_HEIGHT } from 'src/app/utils/utils-table';
 import type { Person } from 'src/app/types/person';
+import { PersonsModalComponent } from './persons-modal/persons-modal.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-persons',
@@ -35,11 +37,23 @@ export class PersonsComponent implements OnInit {
   }
 
   addEdit(person_id?: number): void {
-    alert("add person");
+    const modalRef = this._modal.open(PersonsModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
+    modalRef.componentInstance.person_id = person_id;
+    modalRef.closed.subscribe(() => {
+      this.loadData();
+    });
   }
 
-  delete(person_id: number): void {
-    alert("delete person");
+  delete(person: Person): void {
+    const modalRef = this._modal.open(ConfirmDialogComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
+    modalRef.componentInstance.title = `Ștergere persoană`;
+    modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți persoana cu numele <b>${person.first_name} ${person.last_name}</b> și CNP-ul <b>${person.cnp}</b>?`;
+    modalRef.closed.subscribe(() => {
+      axios.delete(`/api/person/${person.id}`).then(() => {
+        this._toastr.success('Persoana a fost ștearsă cu succes!');
+        this.loadData();
+      }).catch(() => this._toastr.error('Eroare la ștergerea persoanei!'));
+    });
   }
 
   onResize(): void {

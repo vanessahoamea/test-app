@@ -20,6 +20,7 @@ import { PersonsComponent } from './components/persons/persons.component';
 import { CarsComponent } from './components/cars/cars.component';
 import { AgePipe } from './pipes/age.pipe';
 import { TaxPipe } from './pipes/tax.pipe';
+import { PersonsModalComponent } from './components/persons/persons-modal/persons-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TaxPipe } from './pipes/tax.pipe';
     PersonsComponent,
     CarsComponent,
     AgePipe,
-    TaxPipe
+    TaxPipe,
+    PersonsModalComponent
   ],
   imports: [
     BrowserModule,
