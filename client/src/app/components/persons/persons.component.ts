@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -25,11 +26,23 @@ export class PersonsComponent implements OnInit {
   }
 
   loadData(): void {
-    //
+    this._spinner.show();
+    axios.get('/api/person').then(({ data }) => {
+      this.persons = data;
+      this._spinner.hide();
+    }).catch(() => this._toastr.error('Eroare la preluarea persoanelor!'));
   }
 
-  addEdit(): void {
-    alert("add person")
+  addEdit(person_id?: number): void {
+    alert("add person");
+  }
+
+  delete(person_id: number): void {
+    alert("delete person");
+  }
+
+  onResize(): void {
+    SET_HEIGHT('view', 20, 'height');
   }
 
   showTopButton(): void {
