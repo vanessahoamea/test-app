@@ -5,9 +5,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { faPlus, faEdit, faTrashAlt, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { SCROLL_TOP, SET_HEIGHT } from 'src/app/utils/utils-table';
-import type { Person } from 'src/app/types/person';
 import { PersonsModalComponent } from './persons-modal/persons-modal.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import type { Person } from 'src/app/types/person';
 
 @Component({
   selector: 'app-persons',

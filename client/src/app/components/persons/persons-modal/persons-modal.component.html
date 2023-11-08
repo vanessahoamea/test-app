@@ -10,19 +10,19 @@
     <div class='row'>
         <label class='col-2 control-label'>Nume*</label>
         <div class='col-4'>
-            <input [(ngModel)]='data.last_name' class='form-control' placeholder='Nume...' maxlength='200' />
+            <input [(ngModel)]='data.last_name' class='form-control' placeholder='Nume...' maxlength='255' />
         </div>
 
         <label class='col-1 control-label'>Prenume*</label>
         <div class='col-4'>
-            <input [(ngModel)]='data.first_name' class='form-control' placeholder='Prenume...' maxlength='200' />
+            <input [(ngModel)]='data.first_name' class='form-control' placeholder='Prenume...' maxlength='255' />
         </div>
     </div>
 
     <div class='row'>
         <label class='col-2 control-label'>CNP*</label>
         <div class='col-9'>
-            <input [(ngModel)]='data.cnp' class='form-control' placeholder='CNP...' maxlength='200' />
+            <input [(ngModel)]='data.cnp' class='form-control' placeholder='CNP...' maxlength='13' />
         </div>
     </div>
 

@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { faPlus, faEdit, faTrashAlt, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { SCROLL_TOP, SET_HEIGHT } from 'src/app/utils/utils-table';
+import { CarsModalComponent } from './cars-modal/cars-modal.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import type { Car } from 'src/app/types/car';
 
 @Component({
@@ -35,11 +37,23 @@ export class CarsComponent implements OnInit {
   }
 
   addEdit(car_id?: number): void {
-    alert("add car");
+    const modalRef = this._modal.open(CarsModalComponent, { size: 'lg', keyboard: false, backdrop: 'static' });
+    modalRef.componentInstance.car_id = car_id;
+    modalRef.closed.subscribe(() => {
+      this.loadData();
+    });
   }
 
-  delete(car_id: number): void {
-    alert("delete car");
+  delete(car: Car): void {
+    const modalRef = this._modal.open(ConfirmDialogComponent, {size: 'lg', keyboard: false, backdrop: 'static'});
+    modalRef.componentInstance.title = `Ștergere mașină`;
+    modalRef.componentInstance.content = `<p class='text-center mt-1 mb-1'>Doriți să ștergeți mașina <b>${car.brand} ${car.model}</b> (${car.year})?`;
+    modalRef.closed.subscribe(() => {
+      axios.delete(`/api/car/${car.id}`).then(() => {
+        this._toastr.success('Mașina a fost ștearsă cu succes!');
+        this.loadData();
+      }).catch(() => this._toastr.error('Eroare la ștergerea mașinii!'));
+    });
   }
 
   onResize(): void {
