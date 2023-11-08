@@ -1,0 +1,38 @@
+<div class='modal-header'>
+    <h4 class='modal-title'>{{car_id ? 'Modificare' : 'Adăugare'}} mașină</h4>
+</div>
+
+<div class='modal-body'>
+    <div *ngIf='invalidFields.length' class="error">
+        Următoarele câmpuri trebuie completate: {{invalidFields.join(', ')}}
+    </div>
+
+    <div class='row'>
+        <label class='col-2 control-label'>Marcă*</label>
+        <div class='col-4'>
+            <input [(ngModel)]='data.brand' class='form-control' placeholder='Marcă...' maxlength='255' />
+        </div>
+
+        <label class='col-1 control-label'>Model*</label>
+        <div class='col-4'>
+            <input [(ngModel)]='data.model' class='form-control' placeholder='Model...' maxlength='255' />
+        </div>
+    </div>
+
+    <div class='row'>
+        <label class='col-2 control-label'>Anul fabricației*</label>
+        <div class='col-4'>
+            <input [(ngModel)]='data.year' type='number' class='form-control' placeholder='Anul fabricației...' />
+        </div>
+
+        <label class='col-1 control-label'>Capacitatea cilindrică*</label>
+        <div class='col-4'>
+            <input [(ngModel)]='data.cylinder_capacity' type='number' class='form-control' placeholder='Capacitatea cilindrică...' />
+        </div>
+    </div>
+</div>
+
+<div class='modal-footer'>
+    <button type='button' class='btn btn-outline-dark' (click)='activeModal.dismiss()'>Renunță</button>
+    <button type='button' class='btn btn-success' (click)='save()'>Salvează</button>
+</div>

@@ -25,7 +25,7 @@ module.exports = db => {
             FROM "Car"
             WHERE id = ${req.params.id}
             ORDER BY id`, { type: db.QueryTypes.SELECT }).then(resp => {
-                res.send(resp);
+                res.send(resp[0]);
             }).catch(() => res.status(401));
         },
 
