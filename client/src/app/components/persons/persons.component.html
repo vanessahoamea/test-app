@@ -24,10 +24,10 @@
                         <th rowspan='2' width='70px'></th>
                     </tr>
                     <tr>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.name' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.cnp' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.age' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.cars' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
                     </tr>
                 </thead>
             </table>
@@ -41,7 +41,7 @@
                 
                 <table class='table table-hover table-striped table-bordered font-14 p-0'>
                     <tbody>
-                        <tr *ngFor='let person of persons.slice(0, limit); index as i' (dblclick)='addEdit(person.id)' class='cursor-pointer'>
+                        <tr *ngFor='let person of filteredPersons.slice(0, limit); index as i' (dblclick)='addEdit(person.id)' class='cursor-pointer'>
                             <td width='60px' class='text-center'>{{i + 1}}</td>
                             <td>{{person.first_name}} {{person.last_name}}</td>
                             <td width='100px' class='text-center'>{{person.cnp}}</td>

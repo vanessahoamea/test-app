@@ -25,11 +25,11 @@
                         <th rowspan='2' width='70px'></th>
                     </tr>
                     <tr>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
-                        <th><input class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.brand' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.model' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.year' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.cylinder_capacity' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
+                        <th><input [(ngModel)]='filters.tax' (ngModelChange)='filter()' class='form-control input-xs' placeholder='Căutare...'></th>
                     </tr>
                 </thead>
             </table>
@@ -43,7 +43,7 @@
                 
                 <table class='table table-hover table-striped table-bordered font-14 p-0'>
                     <tbody>
-                        <tr *ngFor='let car of cars.slice(0, limit); index as i' (dblclick)='addEdit(car.id)' class='cursor-pointer'>
+                        <tr *ngFor='let car of filteredCars.slice(0, limit); index as i' (dblclick)='addEdit(car.id)' class='cursor-pointer'>
                             <td width='60px' class='text-center'>{{i + 1}}</td>
                             <td width='395px'>{{car.brand}}</td>
                             <td width='395px'>{{car.model}}</td>

@@ -59,7 +59,11 @@ import { CarsModalComponent } from './components/cars/cars-modal/cars-modal.comp
     })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: { disableTooltipInteractivity: true } }],
+  providers: [
+    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: { disableTooltipInteractivity: true } },
+    AgePipe,
+    TaxPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
