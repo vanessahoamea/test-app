@@ -1,8 +1,11 @@
 module.exports = db => {
     return {
         create: (req, res) => {
-            db.models.Car.create(req.body).then(() => {
-                res.send({ success: true });
+            if(!req.body.brand || !req.body.model || !req.body.year || !req.body.cylinder_capacity)
+                return res.status(400).send({ success: false, required_fields: 'brand, model, year, cylinder_capacity' });
+
+            db.models.Car.create(req.body).then((car) => {
+                res.send({ success: true, id: car.id });
             }).catch(() => res.status(401));
         },
 

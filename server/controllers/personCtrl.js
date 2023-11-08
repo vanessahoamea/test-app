@@ -1,6 +1,9 @@
 module.exports = db => {
     return {
         create: (req, res) => {
+            if(!req.body.first_name || !req.body.last_name || !req.body.cnp)
+                return res.status(400).send({ success: false, required_fields: 'first_name, last_name, cnp' });
+
             db.models.Person.create(req.body).then((person) => {
                 res.send({ success: true, id: person.id });
             }).catch(() => res.status(401));
@@ -50,7 +53,7 @@ module.exports = db => {
                 where: { person_id: req.params.id, car_id: req.body.car_id }
             }).then((exists) => {
                 if(exists)
-                    return res.status(401).send({ already_exists: true });
+                    return res.status(400).send({ success: false, already_exists: true });
 
                 db.models.Junction.create({ person_id: req.params.id, car_id: req.body.car_id }).then(() => {
                     res.send({ success: true })
